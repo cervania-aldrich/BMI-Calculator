@@ -21,6 +21,7 @@ class CalculateViewController: UIViewController {
         calculateButton.layer.cornerRadius = 10 //Round the corners of the calculate button
         unitLabel.text = "Metric"
         ftLabel.text = ""
+        ftHeightSlider.isHidden = true
     }
     
     @IBAction func unitSwitchChanged(_ sender: UISwitch) {
@@ -107,7 +108,7 @@ class CalculateViewController: UIViewController {
         heightSlider.maximumValue = 3
         ftLabel.text = ""
         heightLabel.text = "1.50" + "m"
-        ftHeightSlider.isEnabled = false
+        ftHeightSlider.isHidden = true
         
     }
     
@@ -120,11 +121,11 @@ class CalculateViewController: UIViewController {
         weightSlider.maximumValue = 440
         
         //Change height to feet and inches
-        heightSlider.value = 6
+        heightSlider.value = 3
         heightSlider.maximumValue = 11
         ftLabel.text = "5" + "ft"
         heightLabel.text = "3" + "in"
-        ftHeightSlider.isEnabled = true
+        ftHeightSlider.isHidden = false
         ftHeightSlider.value = 5
         
     }
