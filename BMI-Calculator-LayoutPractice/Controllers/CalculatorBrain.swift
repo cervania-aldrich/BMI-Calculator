@@ -4,9 +4,15 @@ struct CalculatorBrain {
     
     var bmi:BMI?
     
-    mutating func calculateBMI(_ height:Float, _ weight:Float) {
+    mutating func calculateBMI(_ height:Float, _ weight:Float, isMetric:Bool) {
         
-        let bmiValue = (weight) / pow(height, 2)
+        var bmiValue:Float
+        
+        if isMetric == true {
+            bmiValue = (weight) / pow(height, 2) //BMI formula using metric units
+        } else {
+            bmiValue = ((weight) / (pow(height, 2))) * 703 //BMI formula using imperial units
+        }
         
         if bmiValue < 18.5 {
             bmi = BMI(value: bmiValue, advice: "Eat more food mate", color: #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)) //Underweight

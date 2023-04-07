@@ -19,21 +19,16 @@ class CalculateViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         calculateButton.layer.cornerRadius = 10 //Round the corners of the calculate button
-        unitLabel.text = "Metric"
-        ftLabel.text = ""
-        ftHeightSlider.isHidden = true
+        ftLabel.isHidden = true //Do not show the ft label
+        ftHeightSlider.isHidden = true //Do not show the ftHeightSlider
     }
     
     @IBAction func unitSwitchChanged(_ sender: UISwitch) {
         
         if sender.isOn == true {
-            
-            metricUI() //Metric
-            
+            metricUI() //Show the metric units in the UI
         } else {
-            
-            imperialUI() //Imperial
-            
+            imperialUI() //Show the imperial units in the UI
         }
         
     }
@@ -75,10 +70,19 @@ class CalculateViewController: UIViewController {
     }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
-        let height = heightSlider.value //Use IBOutlets (as they are variables) to pass information from one function to another (the easiest way)
+        //Use IBOutlets (as they are variables) to pass information from one function to another (the easiest way)
+        let height = heightSlider.value
         let weight = weightSlider.value
         
-        calculatorBrain.calculateBMI(height, weight)
+        if ftHeightSlider.isHidden == true {
+            calculatorBrain.calculateBMI(height, weight, isMetric: true)
+            
+        } else {
+            let heightInFt = ftHeightSlider.value * 12
+            let totalHeightInInches = height + heightInFt
+            
+            calculatorBrain.calculateBMI(totalHeightInInches, weight, isMetric: false)
+        }
         
         self.performSegue(withIdentifier: "goToResult", sender: self) //Triggering the segue we created in the Storyboard.
         
@@ -106,7 +110,7 @@ class CalculateViewController: UIViewController {
         //Changing height to metres
         heightSlider.value = 1.5
         heightSlider.maximumValue = 3
-        ftLabel.text = ""
+        ftLabel.isHidden = true
         heightLabel.text = "1.50" + "m"
         ftHeightSlider.isHidden = true
         
@@ -123,6 +127,7 @@ class CalculateViewController: UIViewController {
         //Change height to feet and inches
         heightSlider.value = 3
         heightSlider.maximumValue = 11
+        ftLabel.isHidden = false
         ftLabel.text = "5" + "ft"
         heightLabel.text = "3" + "in"
         ftHeightSlider.isHidden = false
