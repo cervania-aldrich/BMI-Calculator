@@ -27,35 +27,11 @@ class CalculateViewController: UIViewController {
         
         if sender.isOn == true {
             
-            //Metric
-            
-            unitLabel.text = "Metric"
-            //Change weight to Kgs
-            weightSlider.value = 100
-            weightSlider.maximumValue = 200
-            weightLabel.text = "100Kg"
-            
-            //Changing height to metres
-            ftLabel.text = ""
-            heightLabel.text = "1.50" + "m"
-            ftHeightSlider.isEnabled = false
+            metricUI() //Metric
             
         } else {
             
-            //Imperial
-            
-            unitLabel.text = "Imperial"
-            //Change weight to lbs
-            weightLabel.text = "220lbs"
-            weightSlider.value = 220
-            weightSlider.maximumValue = 440
-            
-            //Change height to feet and inches
-            ftLabel.text = "4" + "ft"
-            heightLabel.text = "5" + "In"
-            ftHeightSlider.isEnabled = true
-            ftHeightSlider.value = 4
-    
+            imperialUI() //Imperial
             
         }
         
@@ -69,15 +45,32 @@ class CalculateViewController: UIViewController {
     
 
     @IBAction func heightSliderChanged(_ sender: UISlider) {
-        let height = sender.value
-        let heightValue = String(format: "%.2f", height)
-        heightLabel.text = "\(heightValue)" + "m"
+        
+        if unitSwitch.isOn == true {
+            let height = sender.value
+            let heightValue = String(format: "%.2f", height)
+            heightLabel.text = "\(heightValue)" + "m"
+        } else {
+            let height = sender.value
+            let heightValue = String(format: "%.0f", height)
+            heightLabel.text = "\(heightValue)" + "in"
+        }
+        
     }
     
     @IBAction func weightSliderChanged(_ sender: UISlider) {
-        let weight = sender.value
-        let weightValue = String(format: "%.0f", weight)
-        weightLabel.text = "\(weightValue)" + "Kg"
+        
+        if unitSwitch.isOn == true {
+            let weight = sender.value
+            let weightValue = String(format: "%.0f", weight)
+            weightLabel.text = "\(weightValue)" + "Kg"
+        } else {
+            let weight = sender.value
+            let weightValue = String(format: "%.0f", weight)
+            weightLabel.text = "\(weightValue)" + "lbs"
+            
+        }
+        
     }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
@@ -99,6 +92,41 @@ class CalculateViewController: UIViewController {
             destinationVC.colorValue = calculatorBrain.getColor()
             
         }
+    }
+    
+    func metricUI(){
+        unitLabel.text = "Metric"
+        
+        //Change weight to Kgs
+        weightLabel.text = "100Kg"
+        weightSlider.value = 100
+        weightSlider.maximumValue = 200
+        
+        //Changing height to metres
+        heightSlider.value = 1.5
+        heightSlider.maximumValue = 3
+        ftLabel.text = ""
+        heightLabel.text = "1.50" + "m"
+        ftHeightSlider.isEnabled = false
+        
+    }
+    
+    func imperialUI(){
+        unitLabel.text = "Imperial"
+        
+        //Change weight to lbs
+        weightLabel.text = "220lbs"
+        weightSlider.value = 220
+        weightSlider.maximumValue = 440
+        
+        //Change height to feet and inches
+        heightSlider.value = 6
+        heightSlider.maximumValue = 11
+        ftLabel.text = "5" + "ft"
+        heightLabel.text = "3" + "in"
+        ftHeightSlider.isEnabled = true
+        ftHeightSlider.value = 5
+        
     }
     
 }
