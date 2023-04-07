@@ -23,6 +23,10 @@ class CalculateViewController: UIViewController {
         ftHeightSlider.isHidden = true //Do not show the ftHeightSlider
     }
     
+    ///The function that defines the behaviour when the UISwitch value has changed.
+    ///
+    ///When the switch is on, this shows that the user what to calculate the BMI using the metric units for height and weight (Metres and Kilograms respectively).
+    ///When the switch is off, this shows that the user what to calculate the BMI using the imperial units for height and weight (Feet/Inches and Pounds respectively).
     @IBAction func unitSwitchChanged(_ sender: UISwitch) {
         
         if sender.isOn == true {
@@ -33,6 +37,9 @@ class CalculateViewController: UIViewController {
         
     }
     
+    ///The function that defines the behaviour when the ftHeightSlider's value has changed.
+    ///
+    ///When this slider is changing its value, we want to display this change back to the user in real-time by using an associated label.
     @IBAction func ftHeightSliderChanged(_ sender: UISlider) {
         let ft = sender.value //Reference to the current value of the slider
         let ftValue = String(format: "%.0f", ft) //Reference to the ft, but formatted as a string.
@@ -40,7 +47,10 @@ class CalculateViewController: UIViewController {
         
     }
     
-
+    ///The function that defines the behaviour when the height slider value has changed.
+    ///
+    ///When this slider is changing its value, we want to display this change back to the user in real-time by using an associated label, that is the height label.
+    ///If the user wants to calculate the BMI using metric units, the height will be shown in metres, but if the user wants to calculate the BMI using imperial units, the height will be shown in Feet/Inches.
     @IBAction func heightSliderChanged(_ sender: UISlider) {
         
         if unitSwitch.isOn == true {
@@ -61,6 +71,10 @@ class CalculateViewController: UIViewController {
         
     }
     
+    ///The function that defines the behaviour when the weight slider value has changed.
+    ///
+    ///When this slider is changing its value, we want to display this change back to the user in real-time by using an associated label, that is the weight label.
+    ///If the user wants to calculate the BMI using metric units, the weight will be shown in Kilograms, but if the user wants to calculate the BMI using imperial units, the weight will be shown in Pounds.
     @IBAction func weightSliderChanged(_ sender: UISlider) {
         
         if unitSwitch.isOn == true {
@@ -81,6 +95,11 @@ class CalculateViewController: UIViewController {
         
     }
     
+    ///The function that defines the behaviour when the calculate button has been pressed.
+    ///
+    ///The BMI will be calculated based on the height and weight measurements defined by the user from the UISlider's. The BMI could be calculated using metric units or imperial units, depending on the users choice.
+    ///The height and weight information is passed to the CalculatorBrain, which then calculates the BMI score using metric units or imperial units.
+    ///Afterwards, this result will be passed to the ResultViewController (via segue), where the BMI score shall be presented to the user, alongside other information such as the advice and color of the background view.
     @IBAction func calculatePressed(_ sender: UIButton) {
         //Use IBOutlets (as they are variables) to pass information from one function to another (the easiest way)
         let height = heightSlider.value
@@ -100,17 +119,21 @@ class CalculateViewController: UIViewController {
         
     }
     
+    ///A function the defines what information we want to pass to the segue.destination (i.e. ResultViewController). This includes the BMI score, advice and color of the background view.
+    ///
+    ///This function belongs to the UIViewController super class that the CalculateViewController has inherited from, hence why we use the 'override' keyword to access the methods of the UIViewController class in the CalculateViewController.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToResult" { //Validate the segue to be triggered (Especially useful if the app had more screens)
             
             let destinationVC = segue.destination as! ResultViewController //The new view controller is initialized when the segue is performed.
-            destinationVC.bmiValue = calculatorBrain.getBMIValue() //Pass the BMI to the ResultsViewController
+            destinationVC.bmiValue = calculatorBrain.getBMIValue() //Pass the BMI score to the ResultsViewController
             destinationVC.adviceValue = calculatorBrain.getAdvice() //Pass the advice to the ResultsViewController
             destinationVC.colorValue = calculatorBrain.getColor() //Pass the colorValue to the ResultsViewController
             
         }
     }
     
+    ///The function that defines the behaviour of the UI when user has selected the metric units (via the UISwitch)
     func metricUI(){
         unitLabel.text = "Metric"
         
@@ -128,6 +151,7 @@ class CalculateViewController: UIViewController {
         
     }
     
+    ///The function that defines the behaviour of the UI when user has selected the imperial units (via the UISwitch)
     func imperialUI(){
         unitLabel.text = "Imperial"
         

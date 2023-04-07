@@ -15,6 +15,8 @@ class ResultViewController: UIViewController {
 
         recalculateButton.layer.cornerRadius = 10 //Round the corners of the recalculate button
        
+        //Assign the various UI elements (defined from the CalculateViewController) on this screen to display the users BMI score, as well as the advice and background color.
+        
         bmiLabel.text = bmiValue
         adviceLabel.text = adviceValue
         view.backgroundColor = colorValue
@@ -22,7 +24,7 @@ class ResultViewController: UIViewController {
     }
     
     @IBAction func recalculatePressed(_ sender: UIButton) {
-        self.dismiss(animated: true) //Do not need self, but it is there to explicitly show we are calling a method from the super class, UIViewController.
+        self.dismiss(animated: true) //Do not need self, but it is there to explicitly show that we are calling a method from the super class (UIViewController).
     }
 
     
