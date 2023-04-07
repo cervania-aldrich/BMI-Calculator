@@ -13,7 +13,7 @@ class ResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        recalculateButton.layer.cornerRadius = 10
+        recalculateButton.layer.cornerRadius = 10 //Round the corners of the recalculate button
        
         bmiLabel.text = bmiValue
         adviceLabel.text = adviceValue
@@ -22,7 +22,7 @@ class ResultViewController: UIViewController {
     }
     
     @IBAction func recalculatePressed(_ sender: UIButton) {
-        self.dismiss(animated: true)
+        self.dismiss(animated: true) //Do not need self, but it is there to explicitly show we are calling a method from the super class, UIViewController.
     }
 
     
