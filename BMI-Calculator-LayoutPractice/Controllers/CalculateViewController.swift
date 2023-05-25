@@ -25,8 +25,8 @@ class CalculateViewController: UIViewController {
     
     ///The function that defines the behaviour when the UISwitch value has changed.
     ///
-    ///When the switch is on, this shows that the user what to calculate the BMI using the metric units for height and weight (Metres and Kilograms respectively).
-    ///When the switch is off, this shows that the user what to calculate the BMI using the imperial units for height and weight (Feet/Inches and Pounds respectively).
+    ///When the switch is on, this shows that the user wants to calculate the BMI using the metric units for height and weight (Metres and Kilograms respectively).
+    ///When the switch is off, this shows that the user wants to calculate the BMI using the imperial units for height and weight (Feet/Inches and Pounds respectively).
     @IBAction func unitSwitchChanged(_ sender: UISwitch) {
         
         if sender.isOn == true {
